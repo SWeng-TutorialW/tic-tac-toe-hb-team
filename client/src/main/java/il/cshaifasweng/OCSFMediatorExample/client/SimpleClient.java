@@ -48,6 +48,7 @@ public class SimpleClient extends AbstractClient {
 			} else if (message != null && message.startsWith("over")) {
 				EventBus.getDefault().post("Game Ended");
 			}
+
 		}
 	}
 	
