@@ -28,7 +28,7 @@ public class PrimaryController {
 		waitingForPlayer.set(value);
 	}
 
-	@FXML
+
 	public static void switchToSecondary() throws IOException {
 		App.setRoot("secondary");
 	}
