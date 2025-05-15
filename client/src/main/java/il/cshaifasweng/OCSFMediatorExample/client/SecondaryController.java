@@ -65,16 +65,22 @@ public class SecondaryController {
     }
     @FXML
     private void clicked(ActionEvent event) {
-        Button button = (Button) event.getSource();
-        String buttonId = button.getId();
-        int row = Character.getNumericValue(buttonId.charAt(6));
-        int col = Character.getNumericValue(buttonId.charAt(7));
-        try {
-            SimpleClient.getClient().sendToServer("player moved " + row + " " + col);
-        } catch (IOException e) {
-            e.printStackTrace();
+        Button clickedButton = (Button) event.getSource();
+
+        for (int row = 0; row < 3; row++) {
+            for (int col = 0; col < 3; col++) {
+                if (clickedButton == buttons[row][col]) {
+                    try {
+                        SimpleClient.getClient().sendToServer("player moved " + row + " " + col);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    return;
+                }
+            }
         }
     }
+
 
     @Subscribe
     public void handleMessage(Object msg) {
