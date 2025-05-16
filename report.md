@@ -3,16 +3,15 @@ Boshra Dahamshy -id: 325226157
 
 
 same computer:
-![](C:\Users\Smart\OneDrive\Desktop\hw5 tocnah\1.png)
-![](C:\Users\Smart\OneDrive\Desktop\hw5 tocnah\2.png)
-![](C:\Users\Smart\OneDrive\Desktop\hw5 tocnah\3.png)
-![](C:\Users\Smart\OneDrive\Desktop\hw5 tocnah\4.png)
+![1.png](1.png)
+![2.png](2.png)
+![3.png](3.png)
+![4.png](4.png)
 
 two computers:
-![](C:\Users\Smart\OneDrive\Desktop\hw5 tocnah\5.png)
-![](C:\Users\Smart\OneDrive\Desktop\hw5 tocnah\6.png)
-![](C:\Users\Smart\OneDrive\Desktop\hw5 tocnah\7.png)
-![](C:\Users\Smart\OneDrive\Desktop\hw5 tocnah\8.png)
-![](C:\Users\Smart\OneDrive\Desktop\hw5 tocnah\9.png)
-![](C:\Users\Smart\OneDrive\Desktop\hw5 tocnah\10.png)
-
+![5.png](5.png)
+![6.png](6.png)
+![7.png](7.png)
+![8.png](8.png)
+![9.png](9.png)
+![10.png](10.png)
