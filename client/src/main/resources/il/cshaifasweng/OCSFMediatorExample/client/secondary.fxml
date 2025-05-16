@@ -11,10 +11,9 @@
       alignment="CENTER" spacing="10.0" prefWidth="600.0" prefHeight="400.0">
 
     <children>
-        <!-- כותרת המשחק -->
+
         <Label text="Tic Tac Toe" style="-fx-font-size: 24px; -fx-font-weight: bold;" />
 
-        <!-- שורה ראשונה -->
         <HBox alignment="CENTER" spacing="10.0">
             <children>
                 <Button fx:id="button00" prefWidth="100" prefHeight="100" onAction="#clicked"/>
@@ -23,7 +22,6 @@
             </children>
         </HBox>
 
-        <!-- שורה שנייה -->
         <HBox alignment="CENTER" spacing="10.0">
             <children>
                 <Button fx:id="button10" prefWidth="100" prefHeight="100" onAction="#clicked"/>
@@ -32,7 +30,6 @@
             </children>
         </HBox>
 
-        <!-- שורה שלישית -->
         <HBox alignment="CENTER" spacing="10.0">
             <children>
                 <Button fx:id="button20" prefWidth="100" prefHeight="100" onAction="#clicked"/>
