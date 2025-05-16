@@ -29,6 +29,9 @@ public class SecondaryController {
     private Button button12;
 
     @FXML
+    private Label turnLabel;
+
+    @FXML
     private Button button20;
 
     @FXML
@@ -58,6 +61,17 @@ public class SecondaryController {
         buttons[2][1] = button21;
         buttons[2][2] = button22;
     }
+    private void resetBoard() {
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                Board[i][j] = null;
+                if (buttons[i][j] != null) {
+                    buttons[i][j].setText(""); // איפוס טקסט הכפתור
+                }
+            }
+        }
+        gameStatus.setText("Game restarted. Waiting for moves...");
+    }
 
     @FXML
     private void switchToPrimary() throws IOException {
@@ -80,34 +94,53 @@ public class SecondaryController {
             }
         }
     }
+    @FXML
+    public void restartGame(ActionEvent event) {
+        try {
+            SimpleClient.getClient().sendToServer("restart game");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println("Restart button clicked");
+
+    }
+
 
 
     @Subscribe
     public void handleMessage(Object msg) {
         Platform.runLater(() -> {
-
-            //game over / winner case
             if (msg instanceof String) {
-                gameStatus.setText(msg.toString());
-
-                //switch turns
+                String message = msg.toString();
+                if (message.equalsIgnoreCase("restart")) {
+                    resetBoard();
+                    return;
+                }
+                gameStatus.setText(message);
             } else if (msg instanceof Object[]) {
                 Object[] update = (Object[]) msg;
                 int row = (int) update[0];
                 int col = (int) update[1];
                 String move = (String) update[2];
+                String nextTurn = (String) update[3];  // "X" or "O"
 
-                //update the label
-                gameStatus.setText("Player : " + update[3].toString());
+                // עדכון הודעת התור
+                String mySymbol = SimpleClient.getClient().getPlayerSymbol();
+                if (mySymbol.equals(nextTurn)) {
+                    turnLabel.setText("Your turn");
+                } else {
+                    turnLabel.setText("Wait for the other player...");
+                }
 
-                //update the button's value
+                // עדכון הלוח
+                gameStatus.setText("Player: " + nextTurn);
                 Board[row][col] = move;
                 Button button = buttons[row][col];
-                //only change if the button is free
                 if (button != null) {
                     button.setText(move);
                 }
             }
         });
     }
+
 }

@@ -6,19 +6,30 @@ import il.cshaifasweng.OCSFMediatorExample.client.ocsf.AbstractClient;
 import il.cshaifasweng.OCSFMediatorExample.entities.Warning;
 
 public class SimpleClient extends AbstractClient {
-	
+	private String playerSymbol = ""; // "O" or "X"
+	public void setPlayerSymbol(String symbol) {
+		this.playerSymbol = symbol;
+	}
+	public String getPlayerSymbol() {
+		return playerSymbol;
+	}
+
 	private static SimpleClient client = null;
 
 
 	private SimpleClient(String host, int port) {
 		super(host, port);
+
 	}
 
 	@Override
 	protected void handleMessageFromServer(Object msg) {
 		if (msg.getClass().equals(Warning.class)) {
 			EventBus.getDefault().post(new WarningEvent((Warning) msg));
-		} else {
+		}
+		else
+		{
+
 			String message = msg.toString();
 			//System.out.println(message);
 			//case1: two players are present => start the game
@@ -49,7 +60,15 @@ public class SimpleClient extends AbstractClient {
 			} else if (message != null && message.startsWith("over")) {
 				EventBus.getDefault().post("Game Ended");
 			}
+			else if (message != null && message.equals("restart")) {
+				System.out.println("Restart message received from server");
+				EventBus.getDefault().post("restart");
+			}
+		    else if (message.startsWith("you are")) {
+				String symbol = message.split(" ")[2];
+				setPlayerSymbol(symbol);
 
+			}
 		}
 	}
 

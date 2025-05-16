@@ -15,7 +15,7 @@ public class SimpleServer extends AbstractServer {
 	private boolean T = true;
 	public SimpleServer(int port) {
 		super(port);
-		
+
 	}
 
 	@Override
@@ -52,11 +52,24 @@ public class SimpleServer extends AbstractServer {
 		//
 		else if (msgString.startsWith("player joined")) {
 			if (SubscribersList.size() == 2) {
+				try {
+					SubscribersList.get(0).getClient().sendToClient("you are O");
+					SubscribersList.get(1).getClient().sendToClient("you are X");
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 				sendToAllClients("start game");
 			}
-		} else if (msgString.startsWith("player moved ")) {
+		}
+		else if (msgString.startsWith("player moved ")) {
 			handleMove(msgString, client);
 		}
+		else if (msgString.equals("restart game")) {
+			Board = new String[3][3];  // אפס את הלוח
+			T = true; // שחקן ראשון מתחיל
+			sendToAllClients("restart");
+		}
+
 	}
 
 	//saves the move and checks if someone won/  game over
@@ -112,8 +125,9 @@ public class SimpleServer extends AbstractServer {
 	}
 	//HELPER FUNCTION FOR WINCHECK
 	private boolean isLineEqual(String a, String b, String c) {
-		return a != null && !a.isEmpty() && a.equals(b) && b.equals(c);
+		return a != null && b != null && c != null && a.equals(b) && b.equals(c);
 	}
+
 	// ANOTHER HELPER FUNC
 	private boolean validMove(int row, int col, ConnectionToClient client) {
 		if(Board[row][col] != null){

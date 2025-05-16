@@ -38,7 +38,10 @@
             </children>
         </HBox>
 
-        <!-- תצוגת מצב המשחק -->
         <Label fx:id="gameStatus" text="Game in progress..." style="-fx-font-size: 16px;" />
+        <Label fx:id="turnLabel" text="" style="-fx-font-size: 14px;" />
+
+        <Button fx:id="restartButton" text="Restart Game" onAction="#restartGame" />
+
     </children>
 </VBox>

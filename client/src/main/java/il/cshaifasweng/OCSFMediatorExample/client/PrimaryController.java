@@ -44,6 +44,14 @@ public class PrimaryController {
 			e.printStackTrace();
 		}
 	}
+	@FXML
+	private void restartGame(ActionEvent event) {
+		try {
+			SimpleClient.getClient().sendToServer("restart game");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
 	@FXML
 	void initialize(){
